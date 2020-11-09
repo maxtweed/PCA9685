@@ -249,8 +249,9 @@ void spiInit(int freq, int settings) {
 
  char spiSendReceive(char send){	
 	SPI0FIFO = send;            // send data to slave
-	while(!SPI0CSbits.DONE);	// wait until SPI transmission complete
-    return SPI0FIFO;            // return received data
+	while(!SPI0CSbits.DONE)
+    ;	// wait until SPI transmission complete
+  return SPI0FIFO;            // return received data
 }
 
 short spiSendReceive16(short send) {
@@ -268,7 +269,7 @@ short spiSendReceive16(short send) {
 /////////////////////////////////////////////////////////////////////
 
 void uartInit(int baud) {
-    uint fb = 12000000/baud; // 3 MHz UART clock
+    unsigned fb = 12000000/baud; // 3 MHz UART clock
     
     pinMode(14, ALT0);
     pinMode(15, ALT0);
