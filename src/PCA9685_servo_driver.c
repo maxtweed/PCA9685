@@ -79,7 +79,9 @@ void PCA9685_setPin(uint8_t num, uint16_t val, _Bool invert)
 {
   // Clamp value between 0 and 4095 inclusive.
   //val = min(val, (uint16_t)4095);
-  (val < (uint16_t)4095) ? (val = val): (val = (uint16_t)4095);
+  //(val < (uint16_t)4095) ? (val = val): (val = (uint16_t)4095);
+  if (val >= (uint16_t)4095) 
+    val = (uint16_t)4095;
   if (invert) {
     if (val == 0) {
       // Special value for signal fully on.
